@@ -10,10 +10,9 @@ export const barRouter = Router();
 barRouter.get('/', barController.getAllController);
 barRouter.get('/:id', barController.getController);
 barRouter.post(
-    '/login', 
+    '/:id', 
     loginRequired,
     userRequired,
-    ownerRequired,
     barController.postController
     );
 barRouter.patch(

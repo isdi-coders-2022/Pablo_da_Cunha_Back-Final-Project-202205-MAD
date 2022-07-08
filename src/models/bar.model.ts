@@ -7,15 +7,15 @@ mongooseConnect();
 export interface iBar {
     id?: string;
     name: string;
-    direction: string;
+    description: string;
     image: string;
     adress: string;    
-    beers: Array<iRelationField>;
+    beers?: Array<iRelationField>;
 }
 
 const barSchema = new mongoose.Schema({
     name: { type: mongoose.SchemaTypes.String, required: true },
-    direction: {
+    description: {
         type: mongoose.SchemaTypes.String,
         required: true,
     },
