@@ -1,19 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
-import { ExtRequest } from '../interfaces/token.js';
+// import { ExtRequest } from '../interfaces/token.js';
 import { User } from '../models/user.model.js';
 
-export const userRequired = async (
+export const ownerRequired = async (
     req: Request,
     _resp: Response,
     next: NextFunction
 ) => {
-    const userID = (req as unknown as ExtRequest).tokenPayload.id;
+    // const userID = (req as unknown as ExtRequest).tokenPayload.id;
     const findUser = await User.findById(req.params.id);
-    if (String(findUser?.role) === String(userID)) {
+    if (findUser?.role === 'Owner') {
         next();
     } else {
         const error = new Error();
-        error.name = 'UserAuthorizationError';
+        error.name = 'OwnerAuthorizationError';
         next(error);
     }
 };
