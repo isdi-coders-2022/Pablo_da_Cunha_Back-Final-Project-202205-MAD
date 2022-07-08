@@ -12,6 +12,7 @@ export interface iUser {
     email: string;
     password: string;
     beers: Array<iRelationField>;
+    role: 'Taster' | 'Owner',
 }
 
 const userSchema = new mongoose.Schema({
@@ -24,6 +25,11 @@ const userSchema = new mongoose.Schema({
     },
     password: { type: mongoose.SchemaTypes.String, required: true },
     beers: [{ type: mongoose.Types.ObjectId, ref: 'Beer' }],
+    role: {
+        type: mongoose.SchemaTypes.String,
+        required: true,
+        enum: ['Taster', 'Owner'],
+    },
 });
 
 userSchema.set('toJSON', {
