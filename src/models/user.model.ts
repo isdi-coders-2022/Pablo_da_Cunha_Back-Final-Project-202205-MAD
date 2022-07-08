@@ -11,7 +11,7 @@ export interface iUser {
     name: string;
     email: string;
     password: string;
-    beers: Array<iRelationField>;
+    beers?: Array<iRelationField>;
     role: 'Taster' | 'Owner',
 }
 

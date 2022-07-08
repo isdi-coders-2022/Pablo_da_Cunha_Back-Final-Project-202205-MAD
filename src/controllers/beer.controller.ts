@@ -6,12 +6,12 @@ export class BeerController {
     getAllController = async (req: Request, res: Response) => {
         req;
         res.setHeader('Content-type', 'application/json');
-        res.send(await Beer.find().populate('artist'));
+        res.send(await Beer.find().populate('bar'));
     };
 
     getController = async (req: Request, resp: Response) => {
         resp.setHeader('Content-type', 'application/json');
-        const beer = await Beer.findById(req.params.id).populate('artist');
+        const beer = await Beer.findById(req.params.id).populate('bar');
         if (beer) {
             resp.send(JSON.stringify(beer));
         } else {

@@ -11,7 +11,7 @@
         "test": "jest --watchAll --coverage",
         "prepare": "husky install"
     },
-    "author": "Alejandro Cerezo",
+    "author": "Pablo da Cunha",
     "license": "ISC",
     "dependencies": {
         "@types/cors": "^2.8.12",
