@@ -28,7 +28,7 @@ const barSchema = new mongoose.Schema({
 });
 
 barSchema.set('toJSON', {
-    transform: (document, returnedObject) => {
+    transform: (_document, returnedObject) => {
         delete returnedObject.__v;
     },
 });

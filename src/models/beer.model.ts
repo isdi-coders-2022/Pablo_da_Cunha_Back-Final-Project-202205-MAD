@@ -1,4 +1,4 @@
-/* istanbul ignore file */
+
 import mongoose from 'mongoose';
 import { mongooseConnect } from '../db/mongoose.js';
 
@@ -9,6 +9,7 @@ export interface iBeer {
     id?: string;
     name: string;
     image: string;
+    tasted: boolean;
     description: string;
     cereal: 'Wheat' | 'Barley';
     style: 'Blonde' | 'Red' | 'Dark';
@@ -18,6 +19,7 @@ export interface iBeer {
 const beerSchema = new mongoose.Schema({
     name: { type: mongoose.SchemaTypes.String, required: true },
     image: { type: mongoose.SchemaTypes.String, required: true },
+    tasted: { type: mongoose.SchemaTypes.Boolean, required:true },
     description: { type: mongoose.SchemaTypes.String, required: true },
     cereal: {
         type: mongoose.SchemaTypes.String,
@@ -38,7 +40,7 @@ const beerSchema = new mongoose.Schema({
 });
 
 beerSchema.set('toJSON', {
-    transform: (document, returnedObject) => {
+    transform: (_document, returnedObject) => {
         delete returnedObject.__v;
     },
 });
