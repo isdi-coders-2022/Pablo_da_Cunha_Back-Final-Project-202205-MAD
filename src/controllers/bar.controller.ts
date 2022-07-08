@@ -6,12 +6,12 @@ export class BarController {
     getAllController = async (req: Request, res: Response) => {
         req;
         res.setHeader('Content-type', 'application/json');
-        res.send(await Bar.find().populate('comics'));
+        res.send(await Bar.find().populate('beers'));
     };
 
     getController = async (req: Request, resp: Response) => {
         resp.setHeader('Content-type', 'application/json');
-        const bar = await Bar.findById(req.params.id).populate('comics');
+        const bar = await Bar.findById(req.params.id).populate('beers');
         if (bar) {
             resp.send(JSON.stringify(bar));
         } else {

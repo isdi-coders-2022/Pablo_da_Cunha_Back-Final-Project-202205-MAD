@@ -9,7 +9,7 @@ export class UserController {
         res.setHeader('Content-type', 'application/json');
         let user;
         try {
-            user = await User.findById(req.params.id).populate('comics');
+            user = await User.findById(req.params.id).populate('beers');
         } catch (error) {
             next(error);
             return;
