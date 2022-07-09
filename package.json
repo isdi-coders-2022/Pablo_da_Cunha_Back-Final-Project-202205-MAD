@@ -1,7 +1,7 @@
 {
-    "name": "",
+    "name": "findyourbeer",
     "version": "1.0.0",
-    "description": "",
+    "description": "Final Proyect for ISDI Coders",
     "main": "index.js",
     "type": "module",
     "scripts": {
