@@ -10,7 +10,7 @@ describe('Given the BeerController', () => {
     beforeEach(() => {
         req = {
             params: { id: '14' },
-            body: { name: 'pipo', type: 'test' },
+            body: { name: 'test', type: 'test' },
         };
         resp = {
             setHeader: jest.fn(),
@@ -80,7 +80,7 @@ describe('Given the BeerController', () => {
         test('Then next should be called', async () => {
             (req as Partial<Request>) = {
                 params: { id: '1414' },
-                body: { name: 'pipa' },
+                body: { name: 'test' },
             };
             Beer.create = jest.fn().mockRejectedValueOnce(null);
             await controller.postController(

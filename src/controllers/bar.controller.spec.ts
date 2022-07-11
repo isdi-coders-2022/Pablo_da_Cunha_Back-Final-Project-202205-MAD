@@ -10,7 +10,7 @@ describe('Given the BarController', () => {
     beforeEach(() => {
         req = {
             params: { id: '14' },
-            body: { name: 'pipo' },
+            body: { name: 'test' },
         };
         resp = {
             setHeader: jest.fn(),
