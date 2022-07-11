@@ -8,7 +8,6 @@ export interface ExtRequest extends Request {
 
 export interface iTokenPayload extends JwtPayload {
     id: string;
-    name: string;
 }
 
 

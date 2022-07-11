@@ -14,7 +14,7 @@ describe('Given the Usercontroller', () => {
     beforeEach(() => {
         req = {
             params: { id: '14' },
-            body: { password: '1441', name: 'pipo' },
+            body: { password: '1441', email: 'pipo@test.com' },
         };
         resp = {
             setHeader: jest.fn(),

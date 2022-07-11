@@ -16,7 +16,7 @@ userRouter.patch(
     userController.patchController
 );
 userRouter.delete(
-    '/delete/:id',
+    '/:id',
     loginRequired,
     userRequired,
     userController.deleteController

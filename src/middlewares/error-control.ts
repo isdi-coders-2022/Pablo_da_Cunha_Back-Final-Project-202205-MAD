@@ -7,6 +7,8 @@ const errors: {
     CastError: 422, // Unprocessable entity
     UserError: 404, // Not found
     UserAuthorizationError: 401, // Unauthorized
+    TokenError: 401, // Token missing or invalid
+    SuperTokenError: 401, // Token completely incorrect
 };
 
 export const errorControl = (
@@ -17,7 +19,6 @@ export const errorControl = (
 ) => {
     req;
     next;
-    console.log(error.message);
 
     let status = 500;
     if (error.name) status = errors[error.name];
