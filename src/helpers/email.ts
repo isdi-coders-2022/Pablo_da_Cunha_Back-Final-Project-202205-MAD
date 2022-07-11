@@ -1,4 +1,4 @@
-export const isEmail = (email: string) => {
+export const email = (email: string) => {
     const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     return regex.test(email);
 };

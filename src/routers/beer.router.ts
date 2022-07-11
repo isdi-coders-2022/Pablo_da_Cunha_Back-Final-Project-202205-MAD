@@ -11,23 +11,23 @@ export const beerRouter = Router();
 beerRouter.get('/', beerController.getAllController);
 beerRouter.get('/:id', beerController.getController);
 beerRouter.post(
-    '/login', 
+    '/', 
     loginRequired,
     userRequired,
     ownerRequired,
     beerController.postController
     );
-beerRouter.patch(
-    '/:id',
-    loginRequired,
-    userRequired,
-    ownerRequired,
-    beerController.patchController
-);
-beerRouter.delete(
-    '/delete/:id',
-    loginRequired,
-    userRequired,
-    ownerRequired,
-    beerController.deleteController
-);
+// beerRouter.patch(
+//     '/:id',
+//     loginRequired,
+//     userRequired,
+//     ownerRequired,
+//     beerController.patchController
+// );
+// beerRouter.delete(
+//     '/delete/:id',
+//     loginRequired,
+//     userRequired,
+//     ownerRequired,
+//     beerController.deleteController
+// );
