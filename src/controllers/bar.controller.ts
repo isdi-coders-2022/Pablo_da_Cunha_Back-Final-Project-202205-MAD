@@ -3,20 +3,27 @@ import { NextFunction, Request, Response } from 'express';
 import { Bar } from '../models/bar.model.js';
 
 export class BarController {
-    getAllController = async (req: Request, res: Response) => {
+    getAllController = async (req: Request, res: Response, _next: NextFunction) => {
         req;
         res.setHeader('Content-type', 'application/json');
         res.send(await Bar.find().populate('beers'));
     };
 
-    getController = async (req: Request, resp: Response) => {
+    getController = async (req: Request, resp: Response, next: NextFunction) => {
         resp.setHeader('Content-type', 'application/json');
-        const bar = await Bar.findById(req.params.id).populate('beers');
-        if (bar) {
+        let bar;
+        try {
+            bar = await Bar.findById(req.params.id).populate('beers');
+            if (bar) {
             resp.send(JSON.stringify(bar));
-        } else {
+            } else {
             resp.status(404);
             resp.send(JSON.stringify({}));
+            }
+        } catch (err) {
+            const error = new Error('Unprocessable entity')
+            error.name = 'CastError'
+            next(error);
         }
     };
     postController = async (

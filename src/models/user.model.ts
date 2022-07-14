@@ -12,7 +12,7 @@ export interface iUser {
     email: string;
     password: string;
     beers?: Array<iRelationField>;
-    role: 'Taster' | 'Owner';
+    role: string;
 }
 
 const userSchema = new mongoose.Schema({

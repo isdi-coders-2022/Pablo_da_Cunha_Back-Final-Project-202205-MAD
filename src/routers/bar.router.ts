@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Router } from 'express';
 import { BarController } from '../controllers/bar.controller.js';
 import { loginRequired } from '../middlewares/login-required.js';
@@ -10,9 +11,7 @@ export const barRouter = Router();
 barRouter.get('/', barController.getAllController);
 barRouter.get('/:id', barController.getController);
 barRouter.post(
-    '/:id', 
-    loginRequired,
-    userRequired,
+    '/', 
     barController.postController
     );
 // barRouter.patch(

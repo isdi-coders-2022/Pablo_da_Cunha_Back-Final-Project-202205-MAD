@@ -4,7 +4,7 @@ import { app } from "../app.js";
 import { initDB } from "../db/init.db.js";
 import { mongooseConnect } from "../db/mongoose.js";
 import { server } from "../index.js";
-import { Bar } from "../models/bar.model.js";
+import { Bar, iBar } from "../models/bar.model.js";
 import { Beer } from "../models/beer.model.js";
 import { iUser, User } from "../models/user.model.js";
 import * as auth from '../services/authorization.js';
@@ -12,7 +12,6 @@ import * as auth from '../services/authorization.js';
 describe('Given the routes of "/user" ', () => {
 
     let token: string;
-    
     let idUser: string;
     let notaToken: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV9.eyJpZCI6IjYyYzg1ZDc1MjBkOTczMTgxMzBjZjI2MCIsIm5hbWUiOiJQYXRhIiwiaWF0IjoxNjU3Mjk4MzM4fQ.2C5JViQ0ANORyuTcJYprqT40WB-haV2Ma-q7S2gic_z'
     beforeEach(async () => {
@@ -46,7 +45,7 @@ describe('Given the routes of "/user" ', () => {
         test('Then status should return code 201', async () => {
             const response = await request(app).post(`/user/`).send(newUser);
             idUser = response.body._id
-            
+            console.log('id', response.body._id);
             expect(response.status).toBe(201);
         });
     });
@@ -68,6 +67,8 @@ describe('Given the routes of "/user" ', () => {
             };
             const response = await request(app).post(`/user/login/`).send(user);
             token = response.body.token
+            console.log('token', response.body.token);           
+            
             expect(response.status).toBe(201);
         });
     });
@@ -177,3 +178,4 @@ describe('Given the routes of "/user" ', () => {
     });
         
 });
+
