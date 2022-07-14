@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Router } from 'express';
 import { BeerController } from '../controllers/beer.controller.js';
 import { loginRequired } from '../middlewares/login-required.js';
@@ -12,9 +13,6 @@ beerRouter.get('/', beerController.getAllController);
 beerRouter.get('/:id', beerController.getController);
 beerRouter.post(
     '/', 
-    loginRequired,
-    userRequired,
-    ownerRequired,
     beerController.postController
     );
 // beerRouter.patch(

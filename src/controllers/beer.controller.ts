@@ -3,15 +3,15 @@ import { NextFunction, Request, Response } from 'express';
 import { Beer } from '../models/beer.model.js';
 
 export class BeerController {
-    getAllController = async (req: Request, res: Response) => {
+    getAllController = async (req: Request, res: Response, _next: NextFunction) => {
         req;
         res.setHeader('Content-type', 'application/json');
-        res.send(await Beer.find().populate('bar'));
+        res.send(await Beer.find());
     };
 
-    getController = async (req: Request, resp: Response) => {
+    getController = async (req: Request, resp: Response, next: NextFunction) => {
         resp.setHeader('Content-type', 'application/json');
-        const beer = await Beer.findById(req.params.id).populate('bar');
+        const beer = await Beer.findById(req.params.id);
         if (beer) {
             resp.send(JSON.stringify(beer));
         } else {

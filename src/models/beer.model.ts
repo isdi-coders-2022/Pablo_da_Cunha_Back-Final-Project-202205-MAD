@@ -9,6 +9,7 @@ export interface iBeer {
     id?: string;
     name: string;
     image: string;
+    video: string;
     tasted: boolean;
     description: string;
     cereal: 'Wheat' | 'Barley';
@@ -19,6 +20,7 @@ export interface iBeer {
 const beerSchema = new mongoose.Schema({
     name: { type: mongoose.SchemaTypes.String, required: true },
     image: { type: mongoose.SchemaTypes.String, required: true },
+    video: { type: mongoose.SchemaTypes.String, required: true },
     tasted: { type: mongoose.SchemaTypes.Boolean, required:true },
     description: { type: mongoose.SchemaTypes.String, required: true },
     cereal: {

@@ -49,16 +49,21 @@ export class UserController {
         resp: Response,
         next: NextFunction
     ) => {
+        
+        
         try {
             const findUser: any = await User.findOne({ email: req.body.email });
+            
+            
             if (
                 !findUser ||
                 !(await auth.compare(req.body.password, findUser.password))
                 ) {
-                // const error = new Error('Invalid user or password');
-                // error.name = 'UserauthorizationError';
-                // next(error);
-                // return;
+                                       
+                const err = new Error('Invalid user or password');
+                err.name = 'UserAuthorizationError';
+                next(err);
+                return;
                 }
                 const tokenPayLoad: iTokenPayload = {
                 id: findUser.id,
@@ -69,9 +74,9 @@ export class UserController {
                 resp.status(201);
                 resp.send(JSON.stringify({ token, id: findUser.id }));
             }
-            catch (err) {
-                const error = new Error('Invalid user or password')
-                error.name = 'UserAuthorizationError'
+            catch (error) {
+                const err = new Error('Invalid user or password')
+                err.name = 'UserAuthorizationError'
                 next(error);
             };
             

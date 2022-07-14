@@ -7,6 +7,7 @@ import { mongooseConnect } from "./mongoose.js";
 
 let aBars: Array<iBar> = [
     {
+        id: '1',
         name: 'Bar1',
         description: 'description',
         image: 'image',
@@ -14,6 +15,7 @@ let aBars: Array<iBar> = [
         beers: [],
     },
     {
+        id: '2',
         name: 'Bar2',
         description: 'description',
         image: 'image',
@@ -24,8 +26,10 @@ let aBars: Array<iBar> = [
 
 let aBeers: Array<iBeer> = [
     {
+        id: '11',
         name: 'Beer1',
         image: 'image',
+        video: 'video',
         tasted: true,
         description: 'description',
         cereal: 'Wheat',
@@ -33,8 +37,10 @@ let aBeers: Array<iBeer> = [
         type: 'Ale',
     },
     {
+        id: '12',
         name: 'Beer2',
         image: 'image',
+        video: 'video',
         tasted: false,
         description: 'description',
         cereal: 'Barley',
