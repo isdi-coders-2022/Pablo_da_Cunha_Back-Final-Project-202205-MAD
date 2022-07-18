@@ -15,6 +15,16 @@ userRouter.patch(
     userRequired,
     userController.patchController
 );
+userRouter.patch(
+    '/fav/:id',
+    loginRequired,
+    userController.addFavController
+);
+userRouter.patch(
+    '/notfav/:id',
+    loginRequired,
+    userController.deleteFavController
+);
 userRouter.delete(
     '/:id',
     loginRequired,
