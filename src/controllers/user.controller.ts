@@ -1,7 +1,10 @@
+/* eslint-disable no-undef */
 import { NextFunction, Request, Response } from 'express';
 import { HydratedDocument } from 'mongoose';
+// import { token } from 'morgan';
 import { ExtRequest, iTokenPayload } from '../interfaces/token.js';
-import { User } from '../models/user.model.js';
+import { iRelationField } from '../interfaces/relation.field.js';
+import { iUser, User } from '../models/user.model.js';
 import * as auth from '../services/authorization.js';
 
 export class UserController {
@@ -37,9 +40,9 @@ export class UserController {
             resp.status(201);
             resp.send(JSON.stringify(newUser));
         }  catch (err) {
-            // const error = new Error('Not Acceptable')
-            // error.name = 'ValidationError'
-            next(err);
+            const error = new Error('Not Acceptable')
+            error.name = 'ValidationError'
+            next(error);
         };
         
     };
@@ -100,6 +103,68 @@ export class UserController {
             error.name = 'UserError'
             next(error);
         };
+    };
+
+    addFavController = async (
+        req: Request,
+        resp: Response,
+        next: NextFunction
+    ) => {
+        try {
+            const idBeer = req.params.id;
+            const { id } = (req as ExtRequest).tokenPayload;
+
+            let findUser: HydratedDocument<iUser> = (await User
+                .findById(id)
+                .populate('beers')
+                .populate('done')) as HydratedDocument<iUser>;
+            if (findUser === null) {
+                next('UserError');
+                return;
+            }
+            if (
+                ((findUser.beers) as Array<iRelationField>).some(
+                    (item: any) => item.id.toString() === idBeer
+                )
+            ) {
+                const error = new Error('Beer has been tasted already');
+                error.name = 'ValidationError';
+                next(error);
+                return;
+            } else {
+                ((findUser.beers) as Array<iRelationField>).push(idBeer as any);
+                findUser = await (await findUser.save()).populate('beers');
+                resp.setHeader('Content-type', 'application/json');
+                resp.status(201);
+                resp.send(JSON.stringify(findUser));
+            }
+        } catch (error) {
+            next('CastError');
+        }
+    };
+
+    deleteFavController = async (
+        req: Request,
+        resp: Response,
+        next: NextFunction
+    ) => {
+        const idBeer = req.params.id;
+        const { id } = (req as ExtRequest).tokenPayload;
+        const findUser: HydratedDocument<iUser> = (await User
+            .findById(id)
+            .populate('beers')
+            .populate('done')) as HydratedDocument<iUser>;
+        if (findUser === null) {
+            next('UserError');
+            return;
+        }
+        findUser.beers = ((findUser.beers) as Array<iRelationField>).filter(
+            (item: any) => item.id.toString() !== idBeer
+        );
+        findUser.save();
+        resp.setHeader('Content-type', 'application/json');
+        resp.status(201);
+        resp.send(JSON.stringify(findUser));
     };
 
     deleteController = async (
