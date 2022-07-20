@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Bar, iBar } from "../models/bar.model.js";
-import { Beer, iBeer } from "../models/beer.model.js";
+import { Brew, iBrew } from "../models/brew.model.js";
 import { iUser, User } from "../models/user.model.js";
 import { encrypt } from "../services/authorization.js";
 import { mongooseConnect } from "./mongoose.js";
@@ -12,7 +12,7 @@ let aBars: Array<iBar> = [
         description: 'description',
         image: 'image',
         adress: 'adress',
-        beers: [],
+        brews: [],
     },
     {
         id: '2',
@@ -20,14 +20,14 @@ let aBars: Array<iBar> = [
         description: 'description',
         image: 'image',
         adress: 'adress',
-        beers: [],
+        brews: [],
     },
 ];
 
-let aBeers: Array<iBeer> = [
+let aBrews: Array<iBrew> = [
     {
         id: '11',
-        name: 'Beer1',
+        name: 'Brew1',
         image: 'image',
         video: 'video',
         tasted: true,
@@ -38,7 +38,7 @@ let aBeers: Array<iBeer> = [
     },
     {
         id: '12',
-        name: 'Beer2',
+        name: 'Brew2',
         image: 'image',
         video: 'video',
         tasted: false,
@@ -54,14 +54,14 @@ let aUsers: Array<iUser> = [
         name: 'Pipo',
         email: 'pipo@test.com',
         password: '141414',
-        beers: [],
+        brews: [],
         role: 'Taster',
     },
     {
         name: 'Pipa',
         email: 'pipa@test.com',
         password: '14141414',
-        beers: [],
+        brews: [],
         role: 'Owner',
     },
 ];
@@ -69,12 +69,12 @@ let aUsers: Array<iUser> = [
 export const initDB = async () => {
     const connect = await mongooseConnect();
     await Bar.deleteMany({})
-    await Beer.deleteMany({})
+    await Brew.deleteMany({})
     await User.deleteMany({})
 
 
     const bars = await Bar.insertMany(aBars);
-    const beers = await Beer.insertMany(aBeers);
+    const brews = await Brew.insertMany(aBrews);
 
     let finalBars = [];
     for (let i = 0; i < bars.length; i++) {
@@ -82,7 +82,7 @@ export const initDB = async () => {
         finalBars[i] = await Bar.findByIdAndUpdate(
             bar.id,
             {
-                $set: { beers: [beers[i].id] },
+                $set: { brews: [brews[i].id] },
             },
             { new: true }
         );
@@ -90,7 +90,7 @@ export const initDB = async () => {
     aUsers = await Promise.all(
         aUsers.map(async (item) => ({
             ...item,
-            beers: [beers[0].id],
+            brews: [brews[0].id],
             passwd: await encrypt(item.password),
         }))
     );
@@ -102,7 +102,7 @@ export const initDB = async () => {
         finalUsers[i] = await User.findByIdAndUpdate(
             item.id,
             {
-                $set: { beers: [beers[i].id] },
+                $set: { brews: [brews[i].id] },
             },
             { new: true }
         );
@@ -110,7 +110,7 @@ export const initDB = async () => {
         
     connect.disconnect();
     return {
-        beers,
+        brews,
         users,
         bars: finalBars,
     };

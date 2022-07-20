@@ -6,14 +6,14 @@ export class BarController {
     getAllController = async (req: Request, res: Response, _next: NextFunction) => {
         req;
         res.setHeader('Content-type', 'application/json');
-        res.send(await Bar.find().populate('beers'));
+        res.send(await Bar.find().populate('brews'));
     };
 
     getController = async (req: Request, resp: Response, next: NextFunction) => {
         resp.setHeader('Content-type', 'application/json');
         let bar;
         try {
-            bar = await Bar.findById(req.params.id).populate('beers');
+            bar = await Bar.findById(req.params.id).populate('brews');
             if (bar) {
             resp.send(JSON.stringify(bar));
             } else {

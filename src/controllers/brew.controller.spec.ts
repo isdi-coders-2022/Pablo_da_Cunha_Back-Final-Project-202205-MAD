@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express'
-import { Beer } from '../models/beer.model.js';
-import { BeerController } from './beer.controller.js';
+import { Brew } from '../models/brew.model.js';
+import { BrewController } from './brew.controller.js';
 
-describe('Given the BeerController', () => {
-    let controller: BeerController;
+describe('Given the BrewController', () => {
+    let controller: BrewController;
     let req: Partial<Request>;
     let resp: Partial<Response>;
     let next: Partial<NextFunction>;
@@ -20,43 +20,43 @@ describe('Given the BeerController', () => {
 
         next = jest.fn();
 
-        controller = new BeerController() as any;
+        controller = new BrewController() as any;
     });
     describe('When getAllController is called', () => {
         test('Then resp.send should be called', async () => {
-            (Beer.find = jest.fn().mockReturnValueOnce({
-                populate: jest.fn().mockResolvedValueOnce({ beer: 'test' }),
+            (Brew.find = jest.fn().mockReturnValueOnce({
+                populate: jest.fn().mockResolvedValueOnce({ brew: 'test' }),
             })),
                 await controller.getAllController(
                     req as Request,
                     resp as Response,
                     next as NextFunction
                 );
-            expect(Beer.find).toHaveBeenCalled();
-            expect(resp.send).toHaveBeenCalledWith({ beer: 'test' });
+            expect(Brew.find).toHaveBeenCalled();
+            expect(resp.send).toHaveBeenCalledWith({ brew: 'test' });
         });
     });
 
     describe('When getController is called with a data return', () => {
         test('Then resp.send should be called', async () => {
-            (Beer.findById = jest.fn().mockReturnValueOnce({
-                populate: jest.fn().mockResolvedValueOnce({ beer: 'test' }),
+            (Brew.findById = jest.fn().mockReturnValueOnce({
+                populate: jest.fn().mockResolvedValueOnce({ brew: 'test' }),
             })),
                 await controller.getController(req as Request, resp as Response, next as NextFunction);
-            expect(Beer.find).toHaveBeenCalled();
+            expect(Brew.find).toHaveBeenCalled();
             expect(resp.send).toHaveBeenCalledWith(
-                JSON.stringify({ beer: 'test' })
+                JSON.stringify({ brew: 'test' })
             );
         });
     });
 
     describe('When getController is called without a data return', () => {
         test('Then resp.send should return an empty object and an error 404', async () => {
-            (Beer.findById = jest.fn().mockReturnValueOnce({
+            (Brew.findById = jest.fn().mockReturnValueOnce({
                 populate: jest.fn().mockResolvedValueOnce(null),
             })),
                 await controller.getController(req as Request, resp as Response, next as NextFunction);
-            expect(Beer.find).toHaveBeenCalled();
+            expect(Brew.find).toHaveBeenCalled();
             expect(resp.status).toHaveBeenCalledWith(404);
             expect(resp.send).toHaveBeenCalledWith(JSON.stringify({}));
         });
@@ -64,7 +64,7 @@ describe('Given the BeerController', () => {
 
     // describe('When postController is called ', () => {
     //     test('Then resp.send should return data and a code 201', async () => {
-    //         (Beer.create = jest.fn().mockReturnValueOnce({ test: 'test' })),
+    //         (Brew.create = jest.fn().mockReturnValueOnce({ test: 'test' })),
     //             await controller.postController(
     //                 req as Request,
     //                 resp as Response,
@@ -83,7 +83,7 @@ describe('Given the BeerController', () => {
     //             params: { id: '1414' },
     //             body: { name: 'test' },
     //         };
-    //         Beer.create = jest.fn().mockRejectedValueOnce(null);
+    //         Brew.create = jest.fn().mockRejectedValueOnce(null);
     //         await controller.postController(
     //             req as Request,
     //             resp as Response,

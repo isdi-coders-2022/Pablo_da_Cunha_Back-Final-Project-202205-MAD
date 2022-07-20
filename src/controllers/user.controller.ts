@@ -12,7 +12,7 @@ export class UserController {
         resp.setHeader('Content-type', 'application/json');
         let user;
         try {
-            user = await User.findById(req.params.id).populate('beers');
+            user = await User.findById(req.params.id).populate('brews');
             if (user) {
                 resp.send(JSON.stringify(user));
             } else {
@@ -111,29 +111,29 @@ export class UserController {
         next: NextFunction
     ) => {
         try {
-            const idBeer = req.params.id;
+            const idBrew = req.params.id;
             const { id } = (req as ExtRequest).tokenPayload;
 
             let findUser: HydratedDocument<iUser> = (await User
                 .findById(id)
-                .populate('beers')
+                .populate('brews')
                 .populate('done')) as HydratedDocument<iUser>;
             if (findUser === null) {
                 next('UserError');
                 return;
             }
             if (
-                ((findUser.beers) as Array<iRelationField>).some(
-                    (item: any) => item.id.toString() === idBeer
+                ((findUser.brews) as Array<iRelationField>).some(
+                    (item: any) => item.id.toString() === idBrew
                 )
             ) {
-                const error = new Error('Beer has been tasted already');
+                const error = new Error('Brew has been tasted already');
                 error.name = 'ValidationError';
                 next(error);
                 return;
             } else {
-                ((findUser.beers) as Array<iRelationField>).push(idBeer as any);
-                findUser = await (await findUser.save()).populate('beers');
+                ((findUser.brews) as Array<iRelationField>).push(idBrew as any);
+                findUser = await (await findUser.save()).populate('brews');
                 resp.setHeader('Content-type', 'application/json');
                 resp.status(201);
                 resp.send(JSON.stringify(findUser));
@@ -148,18 +148,18 @@ export class UserController {
         resp: Response,
         next: NextFunction
     ) => {
-        const idBeer = req.params.id;
+        const idBrew = req.params.id;
         const { id } = (req as ExtRequest).tokenPayload;
         const findUser: HydratedDocument<iUser> = (await User
             .findById(id)
-            .populate('beers')
+            .populate('brews')
             .populate('done')) as HydratedDocument<iUser>;
         if (findUser === null) {
             next('UserError');
             return;
         }
-        findUser.beers = ((findUser.beers) as Array<iRelationField>).filter(
-            (item: any) => item.id.toString() !== idBeer
+        findUser.brews = ((findUser.brews) as Array<iRelationField>).filter(
+            (item: any) => item.id.toString() !== idBrew
         );
         findUser.save();
         resp.setHeader('Content-type', 'application/json');

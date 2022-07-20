@@ -11,7 +11,7 @@ export interface iUser {
     name: string;
     email: string;
     password: string;
-    beers?: Array<iRelationField>;
+    brews?: Array<iRelationField>;
     role: string;
 }
 
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
         unique: true,
     },
     password: { type: mongoose.SchemaTypes.String, required: true },
-    beers: [{ type: mongoose.Types.ObjectId, ref: 'Beer' }],
+    brews: [{ type: mongoose.Types.ObjectId, ref: 'Brew' }],
     role: {
         type: mongoose.SchemaTypes.String,
         required: true,

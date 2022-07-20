@@ -1,31 +1,31 @@
 /* eslint-disable no-unused-vars */
 import { Router } from 'express';
-import { BeerController } from '../controllers/beer.controller.js';
+import { BrewController } from '../controllers/brew.controller.js';
 import { loginRequired } from '../middlewares/login-required.js';
 import { ownerRequired } from '../middlewares/owner-required.js';
 import { userRequired } from '../middlewares/user-required.js';
 
 
-export const beerController = new BeerController();
-export const beerRouter = Router();
+export const brewController = new BrewController();
+export const brewRouter = Router();
 
-beerRouter.get('/', beerController.getAllController);
-beerRouter.get('/:id', beerController.getController);
-beerRouter.post(
+brewRouter.get('/', brewController.getAllController);
+brewRouter.get('/:id', brewController.getController);
+brewRouter.post(
     '/', 
-    beerController.postController
+    brewController.postController
     );
-// beerRouter.patch(
+// brewRouter.patch(
 //     '/:id',
 //     loginRequired,
 //     userRequired,
 //     ownerRequired,
-//     beerController.patchController
+//     brewController.patchController
 // );
-// beerRouter.delete(
+// brewRouter.delete(
 //     '/delete/:id',
 //     loginRequired,
 //     userRequired,
 //     ownerRequired,
-//     beerController.deleteController
+//     brewController.deleteController
 // );
