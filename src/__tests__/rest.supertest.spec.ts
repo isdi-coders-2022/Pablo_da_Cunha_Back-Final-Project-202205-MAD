@@ -5,7 +5,7 @@
 // import { app } from "../app";
 // import { initDB } from "../db/init.db";
 // import { Bar, iBar } from "../models/bar.model";
-// import { Beer, iBeer } from "../models/beer.model";
+// import { Brew, iBrew } from "../models/brew.model";
 // import { iUser, User } from "../models/user.model";
 
 // describe('Given all routes" ', () => {
@@ -21,7 +21,7 @@
     // let idOwner: string;
     // let idTaster: string;
     // let idBar: string;
-    // let idBeer: string;
+    // let idBrew: string;
     // let notaToken: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV9.eyJpZCI6IjYyYzg1ZDc1MjBkOTczMTgxMzBjZjI2MCIsIm5hbWUiOiJQYXRhIiwiaWF0IjoxNjU3Mjk4MzM4fQ.2C5JViQ0ANORyuTcJYprqT40WB-haV2Ma-q7S2gic_z'
     
     // const mockBar: Partial<iBar> = {
@@ -29,12 +29,12 @@
     //     name: 'Bar0',
     //     description: 'cool',
     //     image: 'image',
-    //     beers: [],
+    //     brews: [],
     //     adress: 'adress'
     // };
-    // const mockBeer: Partial<iBeer> = {
+    // const mockBrew: Partial<iBrew> = {
     //     id: '1',
-    //     name: 'Beer1',
+    //     name: 'Brew1',
     //     image: 'image',
     //     tasted: false,
     //     description: 'description',
@@ -45,7 +45,7 @@
     
     // afterAll(async () => {
     //     await User.deleteMany();
-    //     await Beer.deleteMany();
+    //     await Brew.deleteMany();
     //     await Bar.deleteMany();
     //     server.close();
     // });
@@ -59,14 +59,14 @@
     //         name: 'BarOwner',
     //         email: 'barowner@test.com',
     //         password: '141414',
-    //         beers: [],
+    //         brews: [],
     //         role: 'Owner'
     //     };
     //     const newTaster: Partial<iUser> = {
-    //         name: 'BeerTaster',
-    //         email: 'beertaster@test.com',
+    //         name: 'BrewTaster',
+    //         email: 'brewtaster@test.com',
     //         password: '141414',
-    //         beers: [],
+    //         brews: [],
     //         role: 'Taster'
     //     };
     //     const responseOwner = await request(app).post(`/user/`).send(newOwner);
@@ -88,7 +88,7 @@
     //     tokenOwner = responseOwner.body.token
           
     //     const Taster = {
-    //         email: 'beertaster@test.com',
+    //         email: 'brewtaster@test.com',
     //         password: '141414',
         
     //     };
@@ -102,7 +102,7 @@
     //         name: 'Bar0',
     //         description: 'cool',
     //         image: 'image',
-    //         beers: [],
+    //         brews: [],
     //         adress: 'adress'
     //     };
     //     const response = await request(app)
@@ -134,15 +134,15 @@
     //             name: 'Bar0',
     //             description: 'cool',
     //             image: 'image',
-    //             beers: []
+    //             brews: []
     //         }
     //     );
 
     //     expect(response.status).toBe(406);
     // })
-    // test.skip('/beer (POST)', async () => {
-    //     const newBeer: Partial<iBeer> = {
-    //         name: 'Beer1',
+    // test.skip('/brew (POST)', async () => {
+    //     const newBrew: Partial<iBrew> = {
+    //         name: 'Brew1',
     //         image: 'image',
     //         tasted: false,
     //         description: 'description',
@@ -150,29 +150,29 @@
     //         style: 'Blonde',
     //         type: 'Ale'
     //     };
-    //     const response = await request(app).post(`/beer/`).send(newBeer);
+    //     const response = await request(app).post(`/brew/`).send(newBrew);
     //         idOwner;
     //         tokenOwner;
     //         expect(response.status).toBe(201);
     // })
-    // test.skip('/beer (GETALL)', async () => {
-    //     const response = await request(app).get('/beer');
+    // test.skip('/brew (GETALL)', async () => {
+    //     const response = await request(app).get('/brew');
     //         expect(response.status).toBe(200);
     // })
-    // test.skip('/beer (GET)', async () => {
+    // test.skip('/brew (GET)', async () => {
     //     const response = await request(app).get(
-    //         `/beer/${data.beer[0].id}`
+    //         `/brew/${data.brew[0].id}`
     //     );
     //     expect(response.status).toBe(200);
     // })
-    // test.skip('/beer (GET with incorrect id)', async () => {
-    //     const response = await request(app).get(`/beer/141414`);
+    // test.skip('/brew (GET with incorrect id)', async () => {
+    //     const response = await request(app).get(`/brew/141414`);
     //     expect(response.status).toBe(422);
     // })
-    // test.skip('/beer (POST with incorrect params)', async () => {
-    //     const response = await request(app).post(`/beer/`).send(
+    // test.skip('/brew (POST with incorrect params)', async () => {
+    //     const response = await request(app).post(`/brew/`).send(
     //         {
-    //             name: 'Beer1',
+    //             name: 'Brew1',
     //             image: 'image',
     //             tasted: false,
     //             description: 'description',
@@ -192,7 +192,7 @@
 //     let notaToken: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV9.eyJpZCI6IjYyYzg1ZDc1MjBkOTczMTgxMzBjZjI2MCIsIm5hbWUiOiJQYXRhIiwiaWF0IjoxNjU3Mjk4MzM4fQ.2C5JViQ0ANORyuTcJYprqT40WB-haV2Ma-q7S2gic_z'
 //     afterAll(async () => {
 //         await User.deleteMany();
-//         await Beer.deleteMany();
+//         await Brew.deleteMany();
 //         await Bar.deleteMany();
 //         server.close();
 //     });
@@ -205,7 +205,7 @@
 //             name: 'Bar0',
 //             description: 'cool',
 //             image: 'image',
-//             beers: [],
+//             brews: [],
 //             adress: 'adress'
 //         };
 //         test('Then status should return code 201', async () => {
@@ -239,7 +239,7 @@
 //                         name: 'Bar0',
 //                         description: 'cool',
 //                         image: 'image',
-//                         beers: []
+//                         brews: []
 //                 }
 //             );
 

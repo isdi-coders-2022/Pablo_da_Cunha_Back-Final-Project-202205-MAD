@@ -5,7 +5,7 @@ import { initDB } from "../db/init.db.js";
 import { mongooseConnect } from "../db/mongoose.js";
 import { server } from "../index.js";
 import { Bar, iBar } from "../models/bar.model.js";
-import { Beer } from "../models/beer.model.js";
+import { Brew } from "../models/brew.model.js";
 import { iUser, User } from "../models/user.model.js";
 import * as auth from '../services/authorization.js';
 
@@ -24,7 +24,7 @@ describe('Given the routes of "/user" ', () => {
     });
     afterAll(async () => {
         await User.deleteMany();
-        await Beer.deleteMany();
+        await Brew.deleteMany();
         await Bar.deleteMany();
         server.close();
     });
@@ -39,7 +39,7 @@ describe('Given the routes of "/user" ', () => {
             name: 'Pip',
             email: 'pip@test.com',
             password: '141414',
-            beers: [],
+            brews: [],
             role: 'Taster'
         };
         test('Then status should return code 201', async () => {
@@ -100,7 +100,7 @@ describe('Given the routes of "/user" ', () => {
                     name: 'Pip',
                     email: 'pip@test.com',
                     password: '141414',
-                    beers: []
+                    brews: []
                 }
             );
 

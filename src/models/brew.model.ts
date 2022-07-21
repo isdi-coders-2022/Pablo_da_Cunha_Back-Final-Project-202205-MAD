@@ -5,7 +5,7 @@ import { mongooseConnect } from '../db/mongoose.js';
 
 mongooseConnect();
 
-export interface iBeer {
+export interface iBrew {
     id?: string;
     name: string;
     image: string;
@@ -17,7 +17,7 @@ export interface iBeer {
     type: 'Ale' | 'Lager';
 }
 
-const beerSchema = new mongoose.Schema({
+const brewSchema = new mongoose.Schema({
     name: { type: mongoose.SchemaTypes.String, required: true },
     image: { type: mongoose.SchemaTypes.String, required: true },
     video: { type: mongoose.SchemaTypes.String, required: true },
@@ -41,10 +41,10 @@ const beerSchema = new mongoose.Schema({
     
 });
 
-beerSchema.set('toJSON', {
+brewSchema.set('toJSON', {
     transform: (_document, returnedObject) => {
         delete returnedObject.__v;
     },
 });
 
-export const Beer = mongoose.model('Beer', beerSchema);
+export const Brew = mongoose.model('Brew', brewSchema);
