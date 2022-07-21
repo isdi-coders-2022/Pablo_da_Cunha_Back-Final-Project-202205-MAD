@@ -26,6 +26,31 @@ export class UserController {
             next(error);
         };
     };
+    getControllerByToken = async (
+        req: Request,
+        resp: Response,
+        next: NextFunction
+    ) => {
+        resp.setHeader('Content-type', 'application/json');
+        let user;
+        req as ExtRequest;
+        try {
+            user = await User
+                .findById((req as ExtRequest).tokenPayload.id)
+                .populate('brews')
+          
+        } catch (error) {
+            next(error);
+            return;
+        }
+
+        if (user) {
+            resp.send(JSON.stringify(user));
+        } else {
+            resp.status(404);
+            resp.send(JSON.stringify({}));
+        }
+    };
 
     postController = async (
         req: Request,
@@ -55,7 +80,7 @@ export class UserController {
         
         
         try {
-            const findUser: any = await User.findOne({ email: req.body.email });
+            const findUser: any = await User.findOne({ email: req.body.email }).populate('brews')
             
             
             if (
@@ -75,7 +100,7 @@ export class UserController {
                 const token = auth.createToken(tokenPayLoad);
                 resp.setHeader('Content-type', 'application/json');
                 resp.status(201);
-                resp.send(JSON.stringify({ token, id: findUser.id }));
+                resp.send(JSON.stringify({ token, id: findUser.id, user: findUser }));
             }
             catch (error) {
                 const err = new Error('Invalid user or password')
@@ -92,9 +117,11 @@ export class UserController {
         next: NextFunction
     ) => {
         try {
+            console.log(req.body, "BODY CONTROLLERS");
             const newItem = await User.findByIdAndUpdate(
                 req.params.id,
-                req.body
+                req.body,
+                {new: true},
             );
             resp.setHeader('Content-type', 'application/json');
             resp.send(JSON.stringify(newItem));
@@ -112,16 +139,22 @@ export class UserController {
     ) => {
         try {
             const idBrew = req.params.id;
+            console.log("ID CERVEZA", idBrew);
+            
             const { id } = (req as ExtRequest).tokenPayload;
+            console.log(id, "ID TOKEN");
+            
 
             let findUser: HydratedDocument<iUser> = (await User
                 .findById(id)
-                .populate('brews')
-                .populate('done')) as HydratedDocument<iUser>;
+                .populate('brews')) as HydratedDocument<iUser>;
             if (findUser === null) {
                 next('UserError');
                 return;
             }
+
+            console.log("USERR", );
+            
             if (
                 ((findUser.brews) as Array<iRelationField>).some(
                     (item: any) => item.id.toString() === idBrew

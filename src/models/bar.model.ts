@@ -35,7 +35,7 @@ barSchema.set('toJSON', {
 
 export const Bar = mongoose.model('Bar', barSchema);
 
-export function insertManyRecipe() {
+export function insertManyBar() {
     Bar.insertMany([
         {
             name: "Cafeteria Restaurante La Golondrina",
@@ -43,14 +43,13 @@ export function insertManyRecipe() {
             image: "https://images.lifestyleasia.com/wp-content/uploads/2017/01/09122411/whiterabbit.jpg",
             adress: "C. de la Santísima Trinidad, 10, 28010 Madrid",   
             brews: [
-                           "62d0293dd6390f5a80d53e5d",
-                           "62d02952d6390f5a80d53e5f",
-                           "62d02962d6390f5a80d53e61",
-                           "62d02972d6390f5a80d53e63",
-                           "62d02984d6390f5a80d53e65",
-                           "62d02992d6390f5a80d53e67",
-                           "62d029a4d6390f5a80d53e69",
-                           "62d029b2d6390f5a80d53e6b",
+                           "62d6972dcac903d7f04e4b2f",
+                           "62d6971bcac903d7f04e4b2e",
+                           "62d696dbcac903d7f04e4b2c",
+                           "62d696cbcac903d7f04e4b2b",
+                           "62d696bbcac903d7f04e4b2a",
+                           "62d696a7cac903d7f04e4b29",
+                           
                                
         
                             
@@ -62,12 +61,12 @@ export function insertManyRecipe() {
             image: "https://images.lifestyleasia.com/wp-content/uploads/2017/01/09123159/maldives0615-underwater.jpg",
             adress: "C. de la Santísima Trinidad, 6, 28010 Madrid",   
             brews: [    
-                        "62d02962d6390f5a80d53e61",
-                        "62d02972d6390f5a80d53e63",
-                        "62d02984d6390f5a80d53e65",
-                        "62d02992d6390f5a80d53e67",
-                        "62d029a4d6390f5a80d53e69",
-                        "62d029b2d6390f5a80d53e6b",
+                        "62d696a7cac903d7f04e4b29",
+                        "62d696cbcac903d7f04e4b2b",
+                        "62d696dbcac903d7f04e4b2c",
+                        "62d6972dcac903d7f04e4b2f",
+                        "62d69739cac903d7f04e4b30",
+                        "62d69648cac903d7f04e4b28",
                                   
         
                             
@@ -79,12 +78,12 @@ export function insertManyRecipe() {
             image: "https://images.lifestyleasia.com/wp-content/uploads/2017/01/09141758/Screen-Shot-2017-01-09-at-2.17.08-PM.png",
             adress: "C. de Bravo Murillo, 26, 28015 Madrid",   
             brews: [    
-                        "62d0293dd6390f5a80d53e5d",
-                        "62d02952d6390f5a80d53e5f",
-                        "62d02962d6390f5a80d53e61",
-                        "62d02972d6390f5a80d53e63",
-                        "62d029a4d6390f5a80d53e69",
-                        "62d029b2d6390f5a80d53e6b",
+                        "62d696bbcac903d7f04e4b2a",
+                        "62d696cbcac903d7f04e4b2b",
+                        "62d696dbcac903d7f04e4b2c",
+                        "62d6971bcac903d7f04e4b2e",
+                        "62d6972dcac903d7f04e4b2f",
+                        "62d69739cac903d7f04e4b30",
                             
                             
                     ],
@@ -95,12 +94,12 @@ export function insertManyRecipe() {
             image: "https://images.lifestyleasia.com/wp-content/uploads/2017/01/09122531/gigerbar_gruyeres_024.jpg",
             adress: "C/ Gral. Álvarez de Castro, 21, 28010 Madrid",   
             brews: [
-                        "62d0293dd6390f5a80d53e5d",
-                        "62d02952d6390f5a80d53e5f",
-                        "62d02962d6390f5a80d53e61",
-                        "62d02972d6390f5a80d53e63",
-                        "62d02984d6390f5a80d53e65",
-                        "62d02992d6390f5a80d53e67",
+                        "62d69648cac903d7f04e4b28",
+                        "62d696a7cac903d7f04e4b29",
+                        "62d696bbcac903d7f04e4b2a",
+                        "62d696cbcac903d7f04e4b2b",
+                        "62d696dbcac903d7f04e4b2c",
+                        "62d6971bcac903d7f04e4b2e",
                                          
 
                             
@@ -115,4 +114,4 @@ export function insertManyRecipe() {
         });
 }
 
-// insertManyRecipe()
+// insertManyBar()

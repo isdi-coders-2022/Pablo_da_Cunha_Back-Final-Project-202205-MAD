@@ -7,6 +7,7 @@ export const userController = new UserController();
 export const userRouter = Router();
 
 userRouter.get('/:id', userController.getController);
+userRouter.post('/getByToken', loginRequired, userController.getControllerByToken);
 userRouter.post('/', userController.postController);
 userRouter.post('/login', userController.loginController);
 userRouter.patch(
