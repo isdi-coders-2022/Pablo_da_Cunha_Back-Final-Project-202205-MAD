@@ -19,17 +19,17 @@ export const loginRequired = (
     ) { 
         try {
         token = authorization.substring(7);
-        console.log('TOKEN',token);
+        
         
         decodedToken = verifyToken(token);
-        console.log({decodedToken});
+        
         
         if (typeof decodedToken === 'string') {
-            console.log('loginrequired 1 error');
+            
             next(tokenError);
         } else {
             (req as ExtRequest).tokenPayload = decodedToken as iTokenPayload;
-            console.log('loginrequired 2 error');
+            
             next();
         }
     } 
@@ -38,7 +38,7 @@ export const loginRequired = (
     }
         
     } else {
-        console.log('loginrequired 3 error');
+        
         
         next(tokenError);
     }

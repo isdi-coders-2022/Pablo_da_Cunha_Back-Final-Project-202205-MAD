@@ -52,6 +52,21 @@ describe('Given the Usercontroller', () => {
             );
         });
     });
+    describe('When getControllerByToken is called with an existing token', () => {
+        test('Then resp.send should return a User', async () => {
+            User.findById = jest.fn().mockReturnValue({
+                populate: jest.fn().mockResolvedValue({ user: 'test' }),
+            });
+            await controller.getControllerByToken(
+                req as Request,
+                resp as Response,
+                next as NextFunction
+            );
+            expect(resp.send).toHaveBeenCalledWith(
+                JSON.stringify({ user: 'test' })
+            );
+        });
+    });
 
     describe('When getController is called with a non existing id', () => {
         test('Then resp.send should return an empty object', async () => {
@@ -128,49 +143,13 @@ describe('Given the Usercontroller', () => {
         });
     });
 
-    describe('When deleteController is called with a correct id', () => {
-        test('Then resp.status should return a 202 code', async () => {
-            (req as Partial<ExtRequest>) = {
-                params: { id: '141414' },
-                tokenPayload: { _id: '141414' },
-            };
-            const findUser = '141414';
-            User.findById = jest.fn().mockResolvedValue(findUser);
-
-            await controller.deleteController(
-                req as Request,
-                resp as Response,
-                next as NextFunction
-            );
-
-            expect(resp.status).toBeCalledWith(202);
-        });
-    });
+    
 
     describe('When patchController is called with an incorrect id', () => {
         test('Then next should be called', async () => {
             (req as Partial<ExtRequest>) = {
                 params: { id: '141414' },
             };
-            await controller.patchController(
-                req as Request,
-                resp as Response,
-                next as NextFunction
-            );
-
-            expect(next).toBeCalled();
-        });
-    });
-    describe('When patchController is called with an email', () => {
-        test('Then next should be called', async () => {
-            (req as Partial<ExtRequest>) = {
-                params: { id: '141414' },
-                tokenPayload: { _id: '141414' },
-                body: { name: 'test', email: 'test@test.com' },
-            };
-            const findUser = '141414';
-            User.findByIdAndUpdate = jest.fn().mockResolvedValue(findUser);
-
             await controller.patchController(
                 req as Request,
                 resp as Response,
@@ -197,6 +176,24 @@ describe('Given the Usercontroller', () => {
             );
 
             expect(resp.send).toBeCalled();
+        });
+    });
+    describe('When deleteController is called with a correct id', () => {
+        test('Then resp.status should return a 202 code', async () => {
+            (req as Partial<ExtRequest>) = {
+                params: { id: '141414' },
+                tokenPayload: { _id: '141414' },
+            };
+            const findUser = '141414';
+            User.findById = jest.fn().mockResolvedValue(findUser);
+
+            await controller.deleteController(
+                req as Request,
+                resp as Response,
+                next as NextFunction
+            );
+
+            expect(resp.status).toBeCalledWith(202);
         });
     });
 });

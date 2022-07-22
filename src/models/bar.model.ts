@@ -106,9 +106,6 @@ export function insertManyBar() {
                     ],
             },	
     ])
-        .then(function () {
-            console.log('Data inserted'); // Success
-        })
         .catch(function (error) {
             console.log(error); // Failure
         });
