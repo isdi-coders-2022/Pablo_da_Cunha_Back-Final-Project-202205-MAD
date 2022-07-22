@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import { NextFunction, Request, Response } from 'express';
 import { HydratedDocument } from 'mongoose';
-// import { token } from 'morgan';
 import { ExtRequest, iTokenPayload } from '../interfaces/token.js';
 import { iRelationField } from '../interfaces/relation.field.js';
 import { iUser, User } from '../models/user.model.js';
@@ -117,7 +116,7 @@ export class UserController {
         next: NextFunction
     ) => {
         try {
-            console.log(req.body, "BODY CONTROLLERS");
+            
             const newItem = await User.findByIdAndUpdate(
                 req.params.id,
                 req.body,
@@ -139,10 +138,10 @@ export class UserController {
     ) => {
         try {
             const idBrew = req.params.id;
-            console.log("ID CERVEZA", idBrew);
+            
             
             const { id } = (req as ExtRequest).tokenPayload;
-            console.log(id, "ID TOKEN");
+            
             
 
             let findUser: HydratedDocument<iUser> = (await User
@@ -153,7 +152,7 @@ export class UserController {
                 return;
             }
 
-            console.log("USERR", );
+            
             
             if (
                 ((findUser.brews) as Array<iRelationField>).some(
